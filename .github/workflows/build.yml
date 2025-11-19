@@ -72,12 +72,12 @@ jobs:
         if [ -d "build/TabVST_artefacts/Release/VST3/TabSaver.vst3" ]; then
           cp -r build/TabVST_artefacts/Release/VST3/TabSaver.vst3 artifacts/
         fi
-        if [ -d "build/TabVST_artefacts/Release/Standalone/TabSaver.app" ]; then
-          cp -r build/TabVST_artefacts/Release/Standalone/TabSaver.app artifacts/
-        fi
         if [ -d "build/TabVST_artefacts/Release/AU/TabSaver.component" ]; then
           cp -r build/TabVST_artefacts/Release/AU/TabSaver.component artifacts/
         fi
+        # Add install script and instructions
+        cp install-macos.sh artifacts/
+        cp README-INSTALL.txt artifacts/
 
     - name: Prepare artifacts (Windows)
       if: runner.os == 'Windows'
@@ -87,9 +87,7 @@ jobs:
         if [ -d "build/TabVST_artefacts/Release/VST3/TabSaver.vst3" ]; then
           cp -r build/TabVST_artefacts/Release/VST3/TabSaver.vst3 artifacts/
         fi
-        if [ -f "build/TabVST_artefacts/Release/Standalone/TabSaver.exe" ]; then
-          cp build/TabVST_artefacts/Release/Standalone/TabSaver.exe artifacts/
-        fi
+        cp README-INSTALL.txt artifacts/
 
     - name: Prepare artifacts (Linux)
       if: runner.os == 'Linux'
@@ -98,9 +96,7 @@ jobs:
         if [ -d "build/TabVST_artefacts/Release/VST3/TabSaver.vst3" ]; then
           cp -r build/TabVST_artefacts/Release/VST3/TabSaver.vst3 artifacts/
         fi
-        if [ -f "build/TabVST_artefacts/Release/Standalone/TabSaver" ]; then
-          cp build/TabVST_artefacts/Release/Standalone/TabSaver artifacts/
-        fi
+        cp README-INSTALL.txt artifacts/
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4

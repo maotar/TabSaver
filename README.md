@@ -108,20 +108,10 @@ Copy the VST3 to your plugin folder:
 copy build\TabSaver_artefacts\Release\VST3\TabSaver.vst3 "C:\Program Files\Common Files\VST3\"
 ```
 
-Or use the standalone executable directly from:
-```
-build\TabSaver_artefacts\Release\Standalone\TabSaver.exe
-```
-
 #### Linux
 Copy the VST3 to your plugin folder:
 ```bash
 cp -r build/TabSaver_artefacts/Release/VST3/TabSaver.vst3 ~/.vst3/
-```
-
-Or run the standalone:
-```bash
-./build/TabSaver_artefacts/Release/Standalone/TabSaver
 ```
 
 ## Usage
@@ -158,7 +148,7 @@ tab_vst/
 ## Technical Details
 
 - Built with JUCE 7.x
-- Supports VST3, AU, and Standalone formats
+- Supports VST3 and AU (macOS) formats
 - Stores tab data as XML in DAW project state
 - Pure GUI plugin (no audio processing)
 

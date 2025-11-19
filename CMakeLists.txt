@@ -13,7 +13,7 @@ juce_add_plugin(TabVST
     COMPANY_NAME "YourCompany"
     PLUGIN_MANUFACTURER_CODE Juce
     PLUGIN_CODE Tabv
-    FORMATS AU VST3 Standalone
+    FORMATS AU VST3
     PRODUCT_NAME "TabSaver"
     IS_SYNTH FALSE
     NEEDS_MIDI_INPUT FALSE
@@ -36,21 +36,13 @@ target_sources(TabVST
         Source/KeyboardShortcutsPanel.cpp
 )
 
-# Add custom standalone app
-if(TARGET TabVST_Standalone)
-    target_sources(TabVST_Standalone PRIVATE Source/StandaloneApp.cpp)
-endif()
-
 # Required JUCE modules
 target_compile_definitions(TabVST
     PUBLIC
         JUCE_WEB_BROWSER=0
         JUCE_USE_CURL=0
         JUCE_VST3_CAN_REPLACE_VST2=0
-        JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE=0
         JUCE_DISPLAY_SPLASH_SCREEN=0
-    PRIVATE
-        JUCE_USE_CUSTOM_PLUGIN_STANDALONE_APP=1
 )
 
 # Link JUCE modules
