@@ -4,6 +4,12 @@ A VST3 plugin for writing and editing guitar tablature directly within your DAW.
 
 [![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/maotar)
 
+## Screenshots
+
+![TabSaver Editor](images/tabsaver-editor.png)
+
+![Tab View](images/tabsaver-tab-view.png)
+
 ## Features
 
 - **Visual Tab Editor**: Easy-to-use grid interface for writing tabs
