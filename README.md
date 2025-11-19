@@ -1,6 +1,8 @@
-# Guitar Tab VST Plugin
+# TabSaver
 
-A VST plugin for writing and editing guitar tablature directly within your DAW. Store your guitar tabs alongside your project for easy reference!
+A VST3 plugin for writing and editing guitar tablature directly within your DAW. Store your guitar tabs alongside your project for easy reference!
+
+[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/arnovurk)
 
 ## Features
 
@@ -23,50 +25,96 @@ A VST plugin for writing and editing guitar tablature directly within your DAW. 
 
 ### Prerequisites
 
+#### macOS
 1. **CMake** (3.15 or later)
    ```bash
    brew install cmake
    ```
 
-2. **JUCE Framework** (already in ~/Downloads/JUCE)
+2. **Xcode Command Line Tools**
+   ```bash
+   xcode-select --install
+   ```
 
-3. **Xcode Command Line Tools** (already installed)
+#### Windows
+1. **CMake** (3.15 or later) - Download from [cmake.org](https://cmake.org/download/)
+2. **Visual Studio 2019 or later** with C++ development tools
+
+#### Linux
+1. **CMake** and build tools:
+   ```bash
+   sudo apt-get update
+   sudo apt-get install cmake build-essential
+   ```
+
+2. **JUCE dependencies**:
+   ```bash
+   sudo apt-get install libasound2-dev libjack-jackd2-dev \
+     ladspa-sdk libcurl4-openssl-dev libfreetype6-dev \
+     libx11-dev libxcomposite-dev libxcursor-dev libxext-dev \
+     libxinerama-dev libxrandr-dev libxrender-dev \
+     libwebkit2gtk-4.0-dev libglu1-mesa-dev mesa-common-dev
+   ```
 
 ### Build Steps
 
-1. Create a build directory:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/maotar/TabSaver.git
+   cd TabSaver
+   ```
+
+2. Create a build directory:
    ```bash
    mkdir build
    cd build
    ```
 
-2. Generate build files:
+3. Generate build files:
    ```bash
    cmake ..
    ```
 
-3. Build the plugin:
+4. Build the plugin:
    ```bash
    cmake --build . --config Release
    ```
 
-4. The plugin will be built in different formats:
-   - **VST3**: `build/TabVST_artefacts/Release/VST3/Tab VST.vst3`
-   - **AU**: `build/TabVST_artefacts/Release/AU/Tab VST.component`
-   - **Standalone**: `build/TabVST_artefacts/Release/Standalone/Tab VST.app`
-
 ### Installation
 
+#### macOS
 Copy the plugin to your system plugin folder:
 
-**macOS VST3:**
+**VST3:**
 ```bash
-cp -r build/TabVST_artefacts/Release/VST3/Tab\ VST.vst3 ~/Library/Audio/Plug-Ins/VST3/
+cp -r build/TabSaver_artefacts/Release/VST3/TabSaver.vst3 ~/Library/Audio/Plug-Ins/VST3/
 ```
 
-**macOS AU:**
+**AU:**
 ```bash
-cp -r build/TabVST_artefacts/Release/AU/Tab\ VST.component ~/Library/Audio/Plug-Ins/Components/
+cp -r build/TabSaver_artefacts/Release/AU/TabSaver.component ~/Library/Audio/Plug-Ins/Components/
+```
+
+#### Windows
+Copy the VST3 to your plugin folder:
+```
+copy build\TabSaver_artefacts\Release\VST3\TabSaver.vst3 "C:\Program Files\Common Files\VST3\"
+```
+
+Or use the standalone executable directly from:
+```
+build\TabSaver_artefacts\Release\Standalone\TabSaver.exe
+```
+
+#### Linux
+Copy the VST3 to your plugin folder:
+```bash
+cp -r build/TabSaver_artefacts/Release/VST3/TabSaver.vst3 ~/.vst3/
+```
+
+Or run the standalone:
+```bash
+./build/TabSaver_artefacts/Release/Standalone/TabSaver
 ```
 
 ## Usage
@@ -98,18 +146,6 @@ tab_vst/
 - Stores tab data as XML in DAW project state
 - Pure GUI plugin (no audio processing)
 
-## Future Enhancements
-
-Potential features to add:
-- Scrolling for longer tabs
-- Multiple tab pages/songs per instance
-- Import/Export Guitar Pro format
-- Chord library
-- Print preview
-- Custom tuning creator
-- Rhythm notation
-- Playing techniques notation (bends, slides, etc.)
-
 ## License
 
-[Add your license here]
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
