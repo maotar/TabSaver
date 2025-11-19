@@ -53,6 +53,14 @@ jobs:
     - name: Build
       run: cmake --build build --config Release
 
+    - name: List build output
+      shell: bash
+      run: |
+        echo "Build directory contents:"
+        ls -R build/ || true
+        echo "Looking for artefacts:"
+        find build -name "*.vst3" -o -name "*.component" -o -name "*.app" -o -name "*.exe" || true
+
     - name: Prepare artifacts (macOS)
       if: runner.os == 'macOS'
       run: |
