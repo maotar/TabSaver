@@ -8,13 +8,17 @@ MACOS INSTALLATION (EASY METHOD)
 
 1. Extract the downloaded archive
 2. Open Terminal (you can find it in Applications > Utilities)
-3. Type: cd
+3. In Terminal, type: cd
    (note: there's a space after 'cd')
 4. Drag the extracted TabSaver folder into the Terminal window
 5. Press Enter
-6. Type: ./install-macos.sh
+6. Type exactly: ./install-macos.sh
+   (don't forget the ./ at the beginning!)
 7. Press Enter
 8. Restart your DAW
+
+IMPORTANT: Do NOT use 'sudo'. The script installs to your user folder and
+doesn't need admin privileges.
 
 The plugins will be installed to:
 - VST3: ~/Library/Audio/Plug-Ins/VST3/
