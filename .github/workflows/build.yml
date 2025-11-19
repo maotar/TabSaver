@@ -105,9 +105,43 @@ jobs:
         path: artifacts/
         if-no-files-found: warn
 
+  sign-and-notarize-macos:
+    name: Sign and Notarize macOS
+    needs: build
+    runs-on: macos-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Download macOS artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: TabSaver-macOS
+        path: artifacts
+
+    - name: Sign and Notarize
+      env:
+        DEVELOPER_ID_CERTIFICATE: ${{ secrets.DEVELOPER_ID_CERTIFICATE }}
+        DEVELOPER_ID_CERTIFICATE_PASSWORD: ${{ secrets.DEVELOPER_ID_CERTIFICATE_PASSWORD }}
+        APPLE_ID: ${{ secrets.APPLE_ID }}
+        APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+        APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+      run: |
+        chmod +x .github/scripts/sign-and-notarize.sh
+        .github/scripts/sign-and-notarize.sh
+
+    - name: Upload signed DMG
+      uses: actions/upload-artifact@v4
+      with:
+        name: TabSaver-macOS-DMG
+        path: TabSaver-*.dmg
+        if-no-files-found: error
+
   create-release:
     name: Create Release
-    needs: build
+    needs: [build, sign-and-notarize-macos]
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
 
@@ -123,17 +157,23 @@ jobs:
     - name: Create archives
       run: |
         cd release-artifacts
-        for dir in */; do
+        # Create tar.gz for Linux and Windows
+        for dir in TabSaver-Linux TabSaver-Windows; do
           if [ -d "$dir" ] && [ "$(ls -A $dir)" ]; then
-            dirname=${dir%/}
-            tar -czf "${dirname}.tar.gz" -C "$dir" .
+            tar -czf "${dir}.tar.gz" -C "$dir" .
           fi
         done
+        # Move DMG to root level (no need to archive)
+        if [ -d "TabSaver-macOS-DMG" ]; then
+          mv TabSaver-macOS-DMG/*.dmg . || true
+        fi
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       with:
-        files: release-artifacts/*.tar.gz
+        files: |
+          release-artifacts/*.tar.gz
+          release-artifacts/*.dmg
         generate_release_notes: true
         draft: false
         prerelease: false
