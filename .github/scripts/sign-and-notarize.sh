@@ -119,11 +119,11 @@ fi
 # Copy README
 cp README-MACOS.txt "$MOUNT_POINT/README.txt"
 
-# Create symbolic links to the user's plugin folders
-# Using relative paths that will work for any user
+# Create symbolic links to system-wide plugin folders
+# These require admin access but provide the standard drag-and-drop experience
 cd "$MOUNT_POINT"
-ln -s ~/Library/Audio/Plug-Ins/VST3 "VST3 Folder"
-ln -s ~/Library/Audio/Plug-Ins/Components "Components Folder"
+ln -s /Library/Audio/Plug-Ins/VST3 "VST3"
+ln -s /Library/Audio/Plug-Ins/Components "Components"
 cd -
 
 # Unmount the temporary DMG

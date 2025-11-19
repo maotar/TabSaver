@@ -10,11 +10,16 @@ INSTALLATION
 
 2. Drag and drop the plugins to the destination folders:
    - Drag "TabSaver.vst3" to the "VST3" folder
+   - Enter your admin password when prompted
    - Drag "TabSaver.component" to the "Components" folder
+   - Enter your admin password when prompted
 
 3. Restart your DAW
 
 4. Done! TabSaver is now installed and ready to use.
+
+Note: You need to enter your admin password because the plugins are
+installed to system-wide folders that all users can access.
 
 
 USAGE
