@@ -10,7 +10,7 @@ add_subdirectory(JUCE)
 
 # Define the plugin
 juce_add_plugin(TabVST
-    COMPANY_NAME "YourCompany"
+    COMPANY_NAME "Maotar"
     PLUGIN_MANUFACTURER_CODE Juce
     PLUGIN_CODE Tabv
     FORMATS AU VST3

@@ -14,12 +14,28 @@ permissions:
 
 jobs:
   build:
-    name: Build on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: Build on ${{ matrix.name }}
+    runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        include:
+          - name: Linux x86-64
+            os: Linux
+            arch: x86-64
+            runner: ubuntu-latest
+          - name: Linux ARM64
+            os: Linux
+            arch: arm64
+            runner: ubuntu-24.04-arm
+          - name: macOS
+            os: macOS
+            arch: universal
+            runner: macos-latest
+          - name: Windows
+            os: Windows
+            arch: x86-64
+            runner: windows-latest
 
     steps:
     - name: Checkout code
@@ -98,7 +114,7 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: TabSaver-${{ runner.os }}
+        name: TabSaver-${{ matrix.os }}-${{ matrix.arch }}
         path: artifacts/
         if-no-files-found: warn
 
@@ -115,7 +131,7 @@ jobs:
     - name: Download macOS artifacts
       uses: actions/download-artifact@v4
       with:
-        name: TabSaver-macOS
+        name: TabSaver-macOS-universal
         path: artifacts
 
     - name: Sign and Notarize
@@ -154,12 +170,18 @@ jobs:
     - name: Create archives
       run: |
         cd release-artifacts
-        # Create tar.gz for Linux and Windows
-        for dir in TabSaver-Linux TabSaver-Windows; do
-          if [ -d "$dir" ] && [ "$(ls -A $dir)" ]; then
-            tar -czf "${dir}.tar.gz" -C "$dir" .
-          fi
-        done
+        # Create tar.gz for Linux x86-64
+        if [ -d "TabSaver-Linux-x86-64" ] && [ "$(ls -A TabSaver-Linux-x86-64)" ]; then
+          tar -czf "TabSaver-Linux-x86-64.tar.gz" -C "TabSaver-Linux-x86-64" .
+        fi
+        # Create tar.gz for Linux ARM64
+        if [ -d "TabSaver-Linux-arm64" ] && [ "$(ls -A TabSaver-Linux-arm64)" ]; then
+          tar -czf "TabSaver-Linux-arm64.tar.gz" -C "TabSaver-Linux-arm64" .
+        fi
+        # Create tar.gz for Windows
+        if [ -d "TabSaver-Windows-x86-64" ] && [ "$(ls -A TabSaver-Windows-x86-64)" ]; then
+          tar -czf "TabSaver-Windows.tar.gz" -C "TabSaver-Windows-x86-64" .
+        fi
         # Move DMG to root level (no need to archive)
         if [ -d "TabSaver-macOS-DMG" ]; then
           mv TabSaver-macOS-DMG/*.dmg . || true
