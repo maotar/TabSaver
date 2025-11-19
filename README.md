@@ -15,8 +15,9 @@ A VST3 plugin for writing and editing guitar tablature directly within your DAW.
 - **Visual Tab Editor**: Easy-to-use grid interface for writing tabs
 - **Multiple Tunings**: Standard, Drop D, Drop C, 7-string, 8-string, and more
 - **Keyboard Navigation**: Fast tab entry using number keys and arrow keys
-- **DAW Integration**: Tab data saves with your project
-- **Export**: Copy tabs to clipboard in text format
+- **DAW Integration**: Tab data automatically saves with your DAW project
+- **Copy to Clipboard**: Quickly copy tabs as formatted text for sharing
+- **Import/Export Files**: Save and load tabs as standalone files - perfect for transferring between projects or different DAWs
 
 ## Keyboard Shortcuts
 
@@ -125,12 +126,21 @@ Or run the standalone:
 
 ## Usage
 
+### Basic Editing
 1. Load the plugin in your DAW (as an instrument or MIDI FX)
 2. Select your guitar tuning from the dropdown
 3. Click on the editor to focus it
 4. Use keyboard shortcuts to enter your tabs
-5. Save your DAW project - the tabs will be saved with it!
-6. Use "Copy to Clipboard" to export tabs as text
+5. Save your DAW project - tabs are automatically saved with it!
+
+### Sharing and Transferring Tabs
+- **Copy Tab**: Copies the current tab to clipboard as formatted text (great for sharing online or in notes)
+- **Export**: Saves tab to a `.tab` file - useful for:
+  - Backing up your tabs
+  - Transferring tabs between different DAW projects
+  - Moving tabs to a different DAW (e.g., from Ableton to Logic Pro)
+  - Sharing tab files with other TabSaver users
+- **Import**: Loads a previously exported `.tab` file
 
 ## Project Structure
 
