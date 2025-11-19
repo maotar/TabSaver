@@ -29,7 +29,11 @@ A VST3 plugin for writing and editing guitar tablature directly within your DAW.
 - **[**: Delete column
 - **|**: Insert bar line
 
-## Building the Plugin
+## Installation
+
+Pre-built binaries for macOS, Windows, and Linux are available in the [Releases](https://github.com/maotar/TabSaver/releases) section.
+
+## Building the Plugin from Source
 
 ### Prerequisites
 
