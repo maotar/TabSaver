@@ -6,20 +6,19 @@ Thank you for downloading TabSaver!
 INSTALLATION
 ------------
 
-1. Open the TabSaver DMG file (if not already open)
+Installing VST3 Plugin:
+1. Double-click the "VST3" folder shortcut to open it in Finder
+2. Drag "TabSaver.vst3" from the DMG into the opened Finder window
+3. Close the Finder window
 
-2. Drag and drop the plugins to the destination folders:
-   - Drag "TabSaver.vst3" to the "VST3" folder
-   - Enter your admin password when prompted
-   - Drag "TabSaver.component" to the "Components" folder
-   - Enter your admin password when prompted
+Installing AU Plugin:
+1. Double-click the "Components" folder shortcut to open it in Finder
+2. Drag "TabSaver.component" from the DMG into the opened Finder window
+3. Close the Finder window
 
-3. Restart your DAW
-
-4. Done! TabSaver is now installed and ready to use.
-
-Note: You need to enter your admin password because the plugins are
-installed to system-wide folders that all users can access.
+Final Step:
+- Restart your DAW or rescan plugins in your plugin manager
+- Done! TabSaver is now installed and ready to use.
 
 
 USAGE
