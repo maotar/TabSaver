@@ -1,0 +1,65 @@
+cmake_minimum_required(VERSION 3.15)
+
+project(TabVST VERSION 1.0.0)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Add JUCE as a subdirectory
+add_subdirectory(/Users/digimortal/Downloads/JUCE ${CMAKE_CURRENT_BINARY_DIR}/JUCE)
+
+# Define the plugin
+juce_add_plugin(TabVST
+    COMPANY_NAME "YourCompany"
+    PLUGIN_MANUFACTURER_CODE Juce
+    PLUGIN_CODE Tabv
+    FORMATS AU VST3 Standalone
+    PRODUCT_NAME "TabSaver"
+    IS_SYNTH FALSE
+    NEEDS_MIDI_INPUT FALSE
+    NEEDS_MIDI_OUTPUT FALSE
+    IS_MIDI_EFFECT FALSE
+    EDITOR_WANTS_KEYBOARD_FOCUS TRUE
+    COPY_PLUGIN_AFTER_BUILD FALSE
+)
+
+# Generate JuceHeader.h
+juce_generate_juce_header(TabVST)
+
+# Source files
+target_sources(TabVST
+    PRIVATE
+        Source/PluginProcessor.cpp
+        Source/PluginEditor.cpp
+        Source/TabEngine.cpp
+        Source/TabEditorComponent.cpp
+        Source/KeyboardShortcutsPanel.cpp
+)
+
+# Add custom standalone app
+if(TARGET TabVST_Standalone)
+    target_sources(TabVST_Standalone PRIVATE Source/StandaloneApp.cpp)
+endif()
+
+# Required JUCE modules
+target_compile_definitions(TabVST
+    PUBLIC
+        JUCE_WEB_BROWSER=0
+        JUCE_USE_CURL=0
+        JUCE_VST3_CAN_REPLACE_VST2=0
+        JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE=0
+        JUCE_DISPLAY_SPLASH_SCREEN=0
+    PRIVATE
+        JUCE_USE_CUSTOM_PLUGIN_STANDALONE_APP=1
+)
+
+# Link JUCE modules
+target_link_libraries(TabVST
+    PRIVATE
+        juce::juce_audio_utils
+        juce::juce_gui_extra
+    PUBLIC
+        juce::juce_recommended_config_flags
+        juce::juce_recommended_lto_flags
+        juce::juce_recommended_warning_flags
+)
