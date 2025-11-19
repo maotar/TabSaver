@@ -26,7 +26,7 @@ echo ""
 ARTIFACTS_DIR="artifacts"
 VST3_PATH="$ARTIFACTS_DIR/TabSaver.vst3"
 AU_PATH="$ARTIFACTS_DIR/TabSaver.component"
-DMG_NAME="TabSaver-${VERSION}.dmg"
+DMG_NAME="TabSaver-macOS.dmg"
 ENTITLEMENTS="macos/entitlements.plist"
 
 # Create temporary keychain
@@ -97,17 +97,45 @@ if [ -d "$AU_PATH" ]; then
 fi
 
 # Copy installation instructions
-cp README-INSTALL.txt "$DMG_TEMP/"
+cp README-MACOS.txt "$DMG_TEMP/README.txt"
 
-# Create symbolic links to plugin folders
-ln -s "$HOME/Library/Audio/Plug-Ins/VST3" "$DMG_TEMP/VST3 Folder"
-ln -s "$HOME/Library/Audio/Plug-Ins/Components" "$DMG_TEMP/AU Folder"
+# Create a temporary writable DMG first
+DMG_TEMP_RW="$RUNNER_TEMP/TabSaver-temp.dmg"
+hdiutil create -size 100m -fs HFS+ -volname "TabSaver" "$DMG_TEMP_RW"
 
-# Create DMG
-hdiutil create -volname "TabSaver $VERSION" \
-    -srcfolder "$DMG_TEMP" \
-    -ov -format UDZO \
-    "$DMG_NAME"
+# Mount it
+MOUNT_POINT="/Volumes/TabSaver"
+hdiutil attach "$DMG_TEMP_RW"
+
+# Copy plugins to the mounted DMG
+if [ -d "$VST3_PATH" ]; then
+    cp -r "$VST3_PATH" "$MOUNT_POINT/"
+fi
+
+if [ -d "$AU_PATH" ]; then
+    cp -r "$AU_PATH" "$MOUNT_POINT/"
+fi
+
+# Copy README
+cp README-MACOS.txt "$MOUNT_POINT/README.txt"
+
+# Create alias/symlink to the user's plugin folders
+# Note: We create these as AppleScript aliases that will resolve to the user's home
+osascript <<EOF
+tell application "Finder"
+    make new alias file at POSIX file "$MOUNT_POINT" to POSIX file "/Library/Audio/Plug-Ins/VST3" with properties {name:"VST3"}
+    make new alias file at POSIX file "$MOUNT_POINT" to POSIX file "/Library/Audio/Plug-Ins/Components" with properties {name:"Components"}
+end tell
+EOF
+
+# Unmount the temporary DMG
+hdiutil detach "$MOUNT_POINT"
+
+# Convert to compressed read-only DMG
+hdiutil convert "$DMG_TEMP_RW" -format UDZO -o "$DMG_NAME"
+
+# Clean up temporary DMG
+rm "$DMG_TEMP_RW"
 
 echo "  ✓ DMG created: $DMG_NAME"
 echo ""
