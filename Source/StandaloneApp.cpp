@@ -2,7 +2,7 @@
 #include "PluginProcessor.h"
 
 //==============================================================================
-class StandalonePluginHolder  : public juce::AudioProcessorPlayer::AudioProcessorPlayer
+class StandalonePluginHolder  : public juce::AudioProcessorPlayer
 {
 public:
     StandalonePluginHolder()
@@ -20,7 +20,7 @@ public:
     void setupAudioDevices()
     {
         audioDeviceManager.initialiseWithDefaultDevices(2, 2);
-        setProcessor(processor.get());
+        AudioProcessorPlayer::setProcessor(processor.get());
         audioDeviceManager.addAudioCallback(this);
     }
 
@@ -32,7 +32,7 @@ public:
 
     void deletePlugin()
     {
-        setProcessor(nullptr);
+        AudioProcessorPlayer::setProcessor(nullptr);
         processor = nullptr;
     }
 
