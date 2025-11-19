@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Add JUCE as a subdirectory
-add_subdirectory(/Users/digimortal/Downloads/JUCE ${CMAKE_CURRENT_BINARY_DIR}/JUCE)
+add_subdirectory(JUCE)
 
 # Define the plugin
 juce_add_plugin(TabVST
