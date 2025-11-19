@@ -125,12 +125,12 @@ cp -r build/TabSaver_artefacts/Release/VST3/TabSaver.vst3 ~/.vst3/
 
 ### Sharing and Transferring Tabs
 - **Copy Tab**: Copies the current tab to clipboard as formatted text (great for sharing online or in notes)
-- **Export**: Saves tab to a `.tab` file - useful for:
+- **Export**: Saves tab to a `.tabsaver` file - useful for:
   - Backing up your tabs
   - Transferring tabs between different DAW projects
   - Moving tabs to a different DAW (e.g., from Ableton to Logic Pro)
   - Sharing tab files with other TabSaver users
-- **Import**: Loads a previously exported `.tab` file
+- **Import**: Loads a previously exported `.tabsaver` file
 
 ## Project Structure
 
