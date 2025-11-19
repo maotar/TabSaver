@@ -26,8 +26,9 @@ USAGE
    - Arrow keys: Navigate the grid
    - Space: Move to next column
    - Delete/Backspace: Clear a fret
-   - +/=: Insert column
-   - Ctrl+-: Delete column
+   - ]: Insert column
+   - [: Delete column
+   - |: Insert bar line
 
 Your tabs are automatically saved with your DAW project!
 

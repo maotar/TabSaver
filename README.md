@@ -25,8 +25,9 @@ A VST3 plugin for writing and editing guitar tablature directly within your DAW.
 - **Arrow Keys**: Navigate between strings and positions
 - **Space**: Move to next column
 - **Delete/Backspace**: Clear fret
-- **+/=**: Insert column
-- **Cmd+-**: Delete column
+- **]**: Insert column
+- **[**: Delete column
+- **|**: Insert bar line
 
 ## Building the Plugin
 
