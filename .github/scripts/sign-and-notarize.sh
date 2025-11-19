@@ -119,14 +119,12 @@ fi
 # Copy README
 cp README-MACOS.txt "$MOUNT_POINT/README.txt"
 
-# Create alias/symlink to the user's plugin folders
-# Note: We create these as AppleScript aliases that will resolve to the user's home
-osascript <<EOF
-tell application "Finder"
-    make new alias file at POSIX file "$MOUNT_POINT" to POSIX file "/Library/Audio/Plug-Ins/VST3" with properties {name:"VST3"}
-    make new alias file at POSIX file "$MOUNT_POINT" to POSIX file "/Library/Audio/Plug-Ins/Components" with properties {name:"Components"}
-end tell
-EOF
+# Create symbolic links to the user's plugin folders
+# Using relative paths that will work for any user
+cd "$MOUNT_POINT"
+ln -s ~/Library/Audio/Plug-Ins/VST3 "VST3 Folder"
+ln -s ~/Library/Audio/Plug-Ins/Components "Components Folder"
+cd -
 
 # Unmount the temporary DMG
 hdiutil detach "$MOUNT_POINT"
