@@ -128,6 +128,17 @@ cp -r build/TabSaver_artefacts/Release/VST3/TabSaver.vst3 ~/.vst3/
 4. Use keyboard shortcuts to enter your tabs
 5. Save your DAW project - tabs are automatically saved with it!
 
+### Organizing Your Tabs
+- **Sections**: Create different sections for your song (e.g., "Intro", "Verse", "Chorus")
+  - Click the **+** button next to "Sections" to add a new section
+  - Double-click a section to rename it
+  - Right-click for options to clear, copy, or paste sections
+- **Parts**: Within each section, create multiple parts (e.g., "Guitar 1", "Guitar 2", "Bass")
+  - Click the **+** button next to "Parts" to add a new part
+  - Double-click a part to rename it
+  - Right-click for options to clear, copy, or paste parts
+- **Tab View**: Click "View Tab" to see all sections and parts combined into a complete, formatted tablature
+
 ### Sharing and Transferring Tabs
 - **Copy Tab**: Copies the current tab to clipboard as formatted text (great for sharing online or in notes)
 - **Export**: Saves tab to a `.tabsaver` file - useful for:
