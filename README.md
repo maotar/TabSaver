@@ -1,6 +1,6 @@
 # TabSaver
 
-A VST3 plugin for writing and editing guitar tablature directly within your DAW. Store your guitar tabs alongside your project for easy reference!
+A VST3/AU plugin for writing and editing guitar tablature directly within your DAW. Store your guitar tabs alongside your project for easy reference.
 
 [![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/maotar)
 
